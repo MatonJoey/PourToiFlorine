@@ -105,11 +105,11 @@ body {
 @keyframes openmsg {
 	0% {
 		height: 0px;
-		padding: 0px 20px;
+		padding: 0px 35px;
 	}
 	100% {
 		height: 75%;
-		padding: 20px 20px;
+		padding: 35px 35px;
 	}
 }
 
@@ -119,7 +119,7 @@ body {
 	}
 	100% {
 		top: 85%;
-		transform: translate(-50%, 0);
+		transform: translate(-50%, 50%);
 	}
 }
 
@@ -173,6 +173,11 @@ body {
 
 .openedHer {
 	top: 85%;
-	transform: translate(-50%, 0);
+	transform: translate(-50%, 45%);
 }
 
+@media (max-width: 600px) {
+    .message {
+        min-width: 75%;
+    }
+}

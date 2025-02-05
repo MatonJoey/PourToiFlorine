@@ -1,3 +1,5 @@
+let heartInterval;
+
 document.getElementById("messageState").addEventListener("change", function() {
     const messageElements = document.querySelectorAll(".message");
     const heartElements = document.querySelectorAll(".heart");
@@ -19,6 +21,8 @@ document.getElementById("messageState").addEventListener("change", function() {
         container.style.transition = "background-color 3s";
         container.style.backgroundColor = "#f48fb1";
         console.log("Abrindo");
+        document.getElementById("messageState").checked = true;
+        heartInterval = setInterval(createSmallHeart, 150);
     } else {
         messageElements.forEach(el => {
             el.classList.remove("no-anim");
@@ -31,6 +35,8 @@ document.getElementById("messageState").addEventListener("change", function() {
         container.style.transition = "background-color 2s";
         container.style.backgroundColor = "#fce4ec";
         console.log("fechando");
+        document.getElementById("messageState").checked = false;
+        clearInterval(heartInterval);
     }
 });
 
@@ -73,4 +79,28 @@ document.querySelectorAll(".message").forEach(el => {
 document.querySelectorAll(".heart").forEach(el => {
     el.addEventListener('animationend', heartAnimationEndHandler);
 });
+
+function createSmallHeart() {
+    const smallHeart = document.createElement("img");
+    smallHeart.src = "https://upload.wikimedia.org/wikipedia/commons/4/42/Love_Heart_SVG.svg"; // URL du cœur
+    smallHeart.classList.add("small-heart");
+    
+    // Positionner le cœur aléatoirement
+    const x = Math.random() * 100; // Position horizontale
+    const y = Math.random() * 100; // Position verticale
+    smallHeart.style.left = `${x}vw`;
+    smallHeart.style.top = `${y}vh`;
+    
+    document.querySelector(".small-heart-container").appendChild(smallHeart);
+    
+    // Animation d'apparition et de disparition
+    setTimeout(() => {
+        smallHeart.style.opacity = 0; // Faire disparaître le cœur
+    }, 100); // Délai avant de commencer à disparaître
+
+    // Supprimer le cœur après l'animation
+    setTimeout(() => {
+        smallHeart.remove();
+    }, 2000); // Temps total avant de supprimer le cœur
+}
 
